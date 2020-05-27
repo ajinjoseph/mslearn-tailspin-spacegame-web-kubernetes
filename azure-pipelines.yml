@@ -44,7 +44,7 @@ stages:
   dependsOn: Build
   jobs:
   - deployment: Deploy
-    displayName: Deploy
+    displayName: 'Deploy'
     pool:
       vmImage: 'ubuntu-16.04'
     environment: 'spike.default'
@@ -57,7 +57,7 @@ stages:
           - download: current
             artifact: manifests
     - task: KubernetesManifest@0
-      displayName: Create imagePullSecret
+      displayName: 'Create imagePullSecret'
       inputs:
         action: createSecret
         secretName: $(imagePullSecret)
@@ -65,7 +65,7 @@ stages:
         kubernetesServiceConnection: 'Kubernetes Cluster Connection'
         namespace: 'default'
     - task: KubernetesManifest@0
-      displayName: Deploy to Kubernetes cluster
+      displayName: 'Deploy to Kubernetes cluster'
       inputs:
         action: deploy
         kubernetesServiceConnection: 'Kubernetes Cluster Connection'
